@@ -28,16 +28,39 @@ Android App (APK)
 ~/mobile-dev-env/
 ├── ubuntu-rootfs/          # Ubuntu 22.04 RootFS
 ├── vscode-server/          # VS Code Server 安装
+├── vscode-data/            # VS Code 用户数据（持久化）
+│   ├── extensions/         # 安装的扩展（marketplace 下载的插件都在这里）
+│   └── globalStorage/      # 扩展全局存储
 ├── scripts/                # 管理脚本
 │   ├── install.sh          # 一键安装
 │   ├── start.sh            # 启动环境
 │   ├── stop.sh             # 停止环境
 │   └── fix-libs.sh         # 库修复工具
 ├── workspace/              # 代码工作目录（挂载到容器 /root/workspace）
+│   └── projects/           # 你的项目文件夹，推荐放这里
 └── config/                 # 配置文件
     ├── bashrc              # 容器内 bash 配置
-    └── vscode-settings.json
+    ├── vscode-settings.json # VS Code 用户设置
+    └── argv.json           # VS Code 启动参数
 ```
+
+### 数据持久化说明
+
+**VS Code 扩展**
+- 存储位置：`~/mobile-dev-env/vscode-data/extensions/`
+- 在 VS Code 界面里点击"安装扩展"即可，重启 App 后扩展依然存在
+- 扩展数据量可能较大（几百 MB），但只占用一次下载时间
+
+**项目/代码文件**
+- 默认工作目录：`~/mobile-dev-env/workspace/`（挂载到容器内 `/root/workspace`）
+- 你可以在 VS Code 里打开 `workspace/projects/myapp` 这样的子目录
+- 所有代码文件都保存在持久化分区，重启不会丢失
+- 支持 Git：容器内可以使用 git clone/commit/push
+
+**VS Code 用户设置**
+- 配置文件：`~/mobile-dev-env/config/vscode-settings.json`
+- 主题、快捷键、字体等设置都会保存到这里
+- 重启后自动加载
 
 ## 核心功能
 
