@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mobile VS Code</string>
+    <string name="title_installing">Installing Environment...</string>
+    <string name="title_starting">Starting VS Code Server...</string>
+    <string name="title_ready">VS Code Ready</string>
+    <string name="hint_open_browser">VS Code is running at http://localhost:8080</string>
+    <string name="btn_install">Install Environment</string>
+    <string name="btn_start">Start VS Code</string>
+    <string name="btn_stop">Stop VS Code</string>
+    <string name="status_not_installed">Environment not installed</string>
+    <string name="status_installed">Environment ready</string>
+    <string name="status_running">VS Code Server running</string>
+    <string name="error_install_failed">Installation failed</string>
+    <string name="error_start_failed">Failed to start VS Code</string>
+</resources>
