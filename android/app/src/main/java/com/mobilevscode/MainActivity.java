@@ -1,10 +1,6 @@
 package com.mobilevscode;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,8 +15,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.mobilevscode.service.CodeServerService;
 
@@ -32,11 +26,15 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * MainActivity for Mobile VS Code.
+ *
+ * Uses app-owned runtime under Context.getFilesDir() (no external storage or Termux required).
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final String VSCODE_URL = "http://localhost:8080";
-    private static final String BASE_DIR = "/data/data/com.termux/files/home/mobile-dev-env";
 
     private WebView webView;
     private ProgressBar progressBar;
@@ -47,13 +45,19 @@ public class MainActivity extends AppCompatActivity {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
+    private RuntimePaths paths;
+    private RuntimeInstaller installer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        paths = RuntimePaths.fromFilesDir(getFilesDir());
+        installer = new RuntimeInstaller(this);
+
         initViews();
-        checkPermissions();
+        checkEnvironment();
     }
 
     private void initViews() {
@@ -93,42 +97,18 @@ public class MainActivity extends AppCompatActivity {
         btnStop.setOnClickListener(v -> stopCodeServer());
     }
 
-    private void checkPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE},
-                        PERMISSION_REQUEST_CODE);
-            } else {
-                checkEnvironment();
-            }
-        } else {
-            checkEnvironment();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                checkEnvironment();
-            } else {
-                statusText.setText("Storage permission required");
-            }
-        }
-    }
-
     private void checkEnvironment() {
         executor.execute(() -> {
-            boolean installed = new File(BASE_DIR).exists();
+            boolean bootstrapReady = installer.ensureBootstrap();
+            boolean installed = installer.isEnvironmentInstalled();
             boolean running = isCodeServerRunning();
 
             mainHandler.post(() -> {
-                if (!installed) {
+                if (!bootstrapReady) {
+                    statusText.setText("Bootstrap failed");
+                    showControlPanel();
+                    btnInstall.setVisibility(View.GONE);
+                } else if (!installed) {
                     showControlPanel();
                     btnInstall.setVisibility(View.VISIBLE);
                     statusText.setText(R.string.status_not_installed);
@@ -151,14 +131,12 @@ public class MainActivity extends AppCompatActivity {
 
         executor.execute(() -> {
             try {
-                // Copy scripts from assets
-                copyScriptsFromAssets();
+                // Bootstrap should already be done in checkEnvironment, but ensure it
+                installer.ensureBootstrap();
 
                 // Run install script
-                ProcessBuilder pb = new ProcessBuilder(
-                        "/data/data/com.termux/files/usr/bin/bash",
-                        BASE_DIR + "/scripts/install.sh"
-                );
+                File installScript = new File(paths.getScriptsDir(), "install.sh");
+                ProcessBuilder pb = ProcessRunner.createScriptProcessBuilder(paths, installScript);
                 pb.redirectErrorStream(true);
                 Process process = pb.start();
 
@@ -221,10 +199,8 @@ public class MainActivity extends AppCompatActivity {
 
         executor.execute(() -> {
             try {
-                ProcessBuilder pb = new ProcessBuilder(
-                        "/data/data/com.termux/files/usr/bin/bash",
-                        BASE_DIR + "/scripts/stop.sh"
-                );
+                File stopScript = new File(paths.getScriptsDir(), "stop.sh");
+                ProcessBuilder pb = ProcessRunner.createScriptProcessBuilder(paths, stopScript);
                 pb.start().waitFor();
 
                 mainHandler.post(() -> {
@@ -250,11 +226,6 @@ public class MainActivity extends AppCompatActivity {
     private void showControlPanel() {
         progressBar.setVisibility(View.GONE);
         controlPanel.setVisibility(View.VISIBLE);
-    }
-
-    private void copyScriptsFromAssets() {
-        // Implementation to copy bundled scripts
-        // This assumes scripts are bundled in assets/scripts/
     }
 
     private boolean isCodeServerRunning() {

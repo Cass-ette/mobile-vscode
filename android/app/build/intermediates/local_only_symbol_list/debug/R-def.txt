@@ -1,0 +1,37 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color vscode_blue
+color vscode_dark
+color white
+drawable ic_launcher_foreground
+id btnInstall
+id btnStart
+id btnStop
+id controlPanel
+id progressBar
+id statusText
+id webView
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+string btn_install
+string btn_start
+string btn_stop
+string error_install_failed
+string error_start_failed
+string hint_open_browser
+string status_installed
+string status_not_installed
+string status_running
+string title_installing
+string title_ready
+string title_starting
+style Theme.MobileVSCode
+style Theme.MobileVSCode.NoActionBar

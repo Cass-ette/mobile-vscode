@@ -1,0 +1,35 @@
+com.mobilevscode.app-coordinatorlayout-1.1.0-0 /Users/chenzilve/.gradle/caches/transforms-3/02af9e47dbacd0a14a6f5b924b2660bf/transformed/coordinatorlayout-1.1.0/res
+com.mobilevscode.app-emoji2-views-helper-1.2.0-1 /Users/chenzilve/.gradle/caches/transforms-3/02ef8704e5213c9af19f3055ecc535ad/transformed/emoji2-views-helper-1.2.0/res
+com.mobilevscode.app-appcompat-resources-1.6.1-2 /Users/chenzilve/.gradle/caches/transforms-3/126dd02f6e2d470678511b78c686349d/transformed/appcompat-resources-1.6.1/res
+com.mobilevscode.app-startup-runtime-1.1.1-3 /Users/chenzilve/.gradle/caches/transforms-3/224e5804e45812605e7a04c742284b66/transformed/startup-runtime-1.1.1/res
+com.mobilevscode.app-viewpager2-1.0.0-4 /Users/chenzilve/.gradle/caches/transforms-3/22a1e15e251ef9ed54fbeac1b71a00a7/transformed/viewpager2-1.0.0/res
+com.mobilevscode.app-drawerlayout-1.1.1-5 /Users/chenzilve/.gradle/caches/transforms-3/2712567a74b42eee63495cf480306f81/transformed/drawerlayout-1.1.1/res
+com.mobilevscode.app-appcompat-1.6.1-6 /Users/chenzilve/.gradle/caches/transforms-3/3c138dc996c1c9ed9736cbf328ef5a0d/transformed/appcompat-1.6.1/res
+com.mobilevscode.app-lifecycle-livedata-core-2.7.0-7 /Users/chenzilve/.gradle/caches/transforms-3/44d7e2278381805be61c5386b0a6a5a9/transformed/lifecycle-livedata-core-2.7.0/res
+com.mobilevscode.app-fragment-1.3.6-8 /Users/chenzilve/.gradle/caches/transforms-3/5cf85f53fd0530a0e9a14bd13153d60a/transformed/fragment-1.3.6/res
+com.mobilevscode.app-annotation-experimental-1.3.0-9 /Users/chenzilve/.gradle/caches/transforms-3/63b078d0c7893bfcad57aa92dba997c0/transformed/annotation-experimental-1.3.0/res
+com.mobilevscode.app-constraintlayout-2.1.4-10 /Users/chenzilve/.gradle/caches/transforms-3/64e1e04e8c7ba265dc174b8e01cc25ac/transformed/constraintlayout-2.1.4/res
+com.mobilevscode.app-recyclerview-1.1.0-11 /Users/chenzilve/.gradle/caches/transforms-3/6dbf6e1456940214c9f433e1c99af8a4/transformed/recyclerview-1.1.0/res
+com.mobilevscode.app-emoji2-1.2.0-12 /Users/chenzilve/.gradle/caches/transforms-3/70c0c576b576747164db74d3aeccd75d/transformed/emoji2-1.2.0/res
+com.mobilevscode.app-lifecycle-viewmodel-savedstate-2.7.0-13 /Users/chenzilve/.gradle/caches/transforms-3/719be0362e826c8b959a98718b559c10/transformed/lifecycle-viewmodel-savedstate-2.7.0/res
+com.mobilevscode.app-lifecycle-runtime-2.7.0-14 /Users/chenzilve/.gradle/caches/transforms-3/845860dccfd906e3a3ae817ec69bb3c4/transformed/lifecycle-runtime-2.7.0/res
+com.mobilevscode.app-activity-1.8.0-15 /Users/chenzilve/.gradle/caches/transforms-3/8b95e812c9a46526091dfd3fa98a64fa/transformed/activity-1.8.0/res
+com.mobilevscode.app-transition-1.2.0-16 /Users/chenzilve/.gradle/caches/transforms-3/8cff8d064757ac8c2a28c70784abebbd/transformed/transition-1.2.0/res
+com.mobilevscode.app-lifecycle-livedata-2.7.0-17 /Users/chenzilve/.gradle/caches/transforms-3/8f1758d2e204d9a7057ef36db70dd8e4/transformed/lifecycle-livedata-2.7.0/res
+com.mobilevscode.app-savedstate-1.2.1-18 /Users/chenzilve/.gradle/caches/transforms-3/97e128f470f0cfae906f02fcb2de37cf/transformed/savedstate-1.2.1/res
+com.mobilevscode.app-material-1.11.0-19 /Users/chenzilve/.gradle/caches/transforms-3/9d7b2188f36e00eebd598bcf0bbfe4b5/transformed/material-1.11.0/res
+com.mobilevscode.app-profileinstaller-1.3.0-20 /Users/chenzilve/.gradle/caches/transforms-3/a99a06858488e2646f89308a33b8b621/transformed/profileinstaller-1.3.0/res
+com.mobilevscode.app-lifecycle-viewmodel-2.7.0-21 /Users/chenzilve/.gradle/caches/transforms-3/b215b36c8697cfa1be4bfcc0c40273ca/transformed/lifecycle-viewmodel-2.7.0/res
+com.mobilevscode.app-lifecycle-process-2.7.0-22 /Users/chenzilve/.gradle/caches/transforms-3/cc3578da3e933d304493295bdc9ef053/transformed/lifecycle-process-2.7.0/res
+com.mobilevscode.app-core-ktx-1.9.0-23 /Users/chenzilve/.gradle/caches/transforms-3/d989292cd676f49509097b4572cc1b06/transformed/core-ktx-1.9.0/res
+com.mobilevscode.app-core-runtime-2.2.0-24 /Users/chenzilve/.gradle/caches/transforms-3/dd178ce98d06bef164c4148de0031348/transformed/core-runtime-2.2.0/res
+com.mobilevscode.app-cardview-1.0.0-25 /Users/chenzilve/.gradle/caches/transforms-3/e248ad0171a9449a84ca13d3147d5ed4/transformed/cardview-1.0.0/res
+com.mobilevscode.app-core-1.9.0-26 /Users/chenzilve/.gradle/caches/transforms-3/f49c561996396247ab48acbe4f1c2f2f/transformed/core-1.9.0/res
+com.mobilevscode.app-lifecycle-livedata-core-ktx-2.7.0-27 /Users/chenzilve/.gradle/caches/transforms-3/f9c4278664c0a7ff11ab9edfab662745/transformed/lifecycle-livedata-core-ktx-2.7.0/res
+com.mobilevscode.app-pngs-28 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/build/generated/res/pngs/debug
+com.mobilevscode.app-resValues-29 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/build/generated/res/resValues/debug
+com.mobilevscode.app-packageDebugResources-30 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.mobilevscode.app-packageDebugResources-31 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.mobilevscode.app-merged_res-32 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/build/intermediates/merged_res/debug
+com.mobilevscode.app-debug-33 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/src/debug/res
+com.mobilevscode.app-main-34 /Users/chenzilve/Projects/mobile vscode/.worktrees/app-owned-runtime/android/app/src/main/res

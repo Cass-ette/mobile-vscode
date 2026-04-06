@@ -13,23 +13,27 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import com.mobilevscode.MainActivity;
+import com.mobilevscode.ProcessRunner;
 import com.mobilevscode.R;
+import com.mobilevscode.RuntimePaths;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 
 public class CodeServerService extends Service {
 
     private static final String CHANNEL_ID = "codeserver_channel";
     private static final int NOTIFICATION_ID = 1;
-    private static final String BASE_DIR = "/data/data/com.termux/files/home/mobile-dev-env";
 
+    private RuntimePaths paths;
     private Process codeServerProcess;
     private Thread logThread;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        paths = RuntimePaths.fromFilesDir(getFilesDir());
         createNotificationChannel();
     }
 
@@ -82,10 +86,8 @@ public class CodeServerService extends Service {
     private void startCodeServer() {
         new Thread(() -> {
             try {
-                ProcessBuilder pb = new ProcessBuilder(
-                        "/data/data/com.termux/files/usr/bin/bash",
-                        BASE_DIR + "/scripts/start.sh"
-                );
+                File startScript = new File(paths.getScriptsDir(), "start.sh");
+                ProcessBuilder pb = ProcessRunner.createScriptProcessBuilder(paths, startScript);
                 pb.redirectErrorStream(true);
                 codeServerProcess = pb.start();
 
@@ -119,10 +121,8 @@ public class CodeServerService extends Service {
             }
 
             // Run stop script
-            ProcessBuilder pb = new ProcessBuilder(
-                    "/data/data/com.termux/files/usr/bin/bash",
-                    BASE_DIR + "/scripts/stop.sh"
-            );
+            File stopScript = new File(paths.getScriptsDir(), "stop.sh");
+            ProcessBuilder pb = ProcessRunner.createScriptProcessBuilder(paths, stopScript);
             pb.start();
 
         } catch (Exception e) {
