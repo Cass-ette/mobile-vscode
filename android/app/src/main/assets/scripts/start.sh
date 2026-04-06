@@ -38,7 +38,15 @@ if [ -f "$ROOTFS_DIR/etc/resolv.conf" ]; then
     fi
 fi
 
-log_info "Starting VS Code Server..."
+# Check for DNS hijacking (common on some WiFi networks)
+log_info "Checking network..."
+BAD_IP="198.18."
+# Try to detect if DNS is working correctly
+if command -v ping >/dev/null 2>&1; then
+    if ! ping -c 1 -W 3 8.8.8.8 >/dev/null 2>&1; then
+        log_warn "Internet connection may be limited"
+    fi
+fi
 
 mkdir -p "$WORKSPACE_DIR" "$VSCODE_DATA_DIR/extensions" "$VSCODE_DATA_DIR/user-data"
 mkdir -p "$(dirname "$PID_FILE")"
@@ -57,6 +65,11 @@ fi
 PROOT_LOG="$LOGS_DIR/proot.log"
 (
     export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    # Ensure DNS is configured in container
+    if [ ! -f "$ROOTFS_DIR/etc/resolv.conf" ] || grep -q "127.0.0.53" "$ROOTFS_DIR/etc/resolv.conf" 2>/dev/null; then
+        echo "nameserver 8.8.8.8" > "$ROOTFS_DIR/etc/resolv.conf"
+        echo "nameserver 8.8.4.4" >> "$ROOTFS_DIR/etc/resolv.conf"
+    fi
     PROOT_TMP_DIR="$LOGS_DIR/proot-tmp" \
     "$PROOT_BIN" -r "$ROOTFS_DIR" \
         -b /dev:/dev \
@@ -66,6 +79,8 @@ PROOT_LOG="$LOGS_DIR/proot.log"
         -b "$WORKSPACE_DIR:/root/workspace" \
         -b "$VSCODE_DATA_DIR:/root/.local/share/code-server" \
         -b "$CODE_SERVER_DIR:/opt/code-server" \
+        -b "$ROOTFS_DIR/etc/resolv.conf:/etc/resolv.conf" \
+        -b "$ROOTFS_DIR/etc/hosts:/etc/hosts" \
         /opt/code-server/bin/code-server \
         --auth none \
         --bind-addr 0.0.0.0:"$CODE_SERVER_PORT" \

@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
             conn.setRequestMethod("GET");
             int responseCode = conn.getResponseCode();
             conn.disconnect();
-            return responseCode == 200;
+            return responseCode >= 200 && responseCode < 300;
         } catch (Exception e) {
             return false;
         }
